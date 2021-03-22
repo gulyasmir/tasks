@@ -9,7 +9,7 @@ class Index extends Controller {
             Session::destroy();
             setcookie('logged', false);
         }
-
+        setcookie('link', URL);
         $this->view->js = array('default.js');
     }
 

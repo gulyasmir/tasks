@@ -32,8 +32,7 @@ $(document).ready(function () {
     $(function () {
 
     $.get('index/xhrPagination', function (pagination) {
-        //var link =  'https://js.gulyasmir.ru/tasks/'
-        var link =  '/'
+        let link =  getCookie('link')
         let countPage = Math.round(pagination)
         let thisPage = getCookie('page')
         let page = Math.round(thisPage)
@@ -73,9 +72,9 @@ $(document).ready(function () {
 
         $.get('index/xhrGetListings', function (tasks) {
 
-            var logged = getCookie('logged')
-            //var link =  'https://js.gulyasmir.ru/tasks/'
-            var link =  '/'
+            let logged = getCookie('logged')
+            let link =  getCookie('link')
+
             logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
             for (var i = 0; i <tasks.length; i++) {
                let updated =  tasks[i].updated ? 'Отредактировано администратором' : ''
