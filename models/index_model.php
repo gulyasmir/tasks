@@ -36,12 +36,21 @@ class Index_Model extends Model {
         $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' => $status));
     }
 
-    public function xhrGetListings($sort,$order) {
-        $sth = $this->db->prepare("SELECT * FROM `pr_task` WHERE 1 ORDER BY `".$sort."` $order");
+    public function xhrGetListings($sort,$order, $offset, $size_page) {
+        $sth = $this->db->prepare("SELECT * FROM `pr_task` WHERE 1 ORDER BY `".$sort."` $order  LIMIT $offset, $size_page");
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
         $data = $sth->fetchAll();
         echo json_encode($data);
+    }
+
+    function xhrGetCount() {
+        $query = "SELECT COUNT(*) FROM `pr_task`";
+        $count = $this->db->prepare($query );
+        $count->execute();
+        $data = $count->fetch();
+        echo json_encode($data[0]);
+
     }
 
 }

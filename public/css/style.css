@@ -16,3 +16,7 @@
     background: url("../images/check2-square.svg") no-repeat top 10px right 10px, #ccffcc;
     background-size: 20px;
 }
+.pagination {
+    width:175px;
+    margin: 0 auto;
+}

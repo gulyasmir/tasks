@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
 // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict'
@@ -23,6 +29,10 @@ $(document).ready(function () {
     $(function () {
 
         $.get('index/xhrGetListings', function (o) {
+
+            var logged = getCookie('logged')
+
+            logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
             for (var i = 0; i <o.length; i++) {
                 var list_for_admin =  '<div class="item status-' + o[i].status + '">' +
                     '<div class="title"> ' + o[i].name + ' -  <a  href="/index/update/' + o[i].id + '">Редактировать</a></div>' +
@@ -34,9 +44,8 @@ $(document).ready(function () {
                     '<div class="email">' + o[i].email + '</div>' +
                     '<div>' + o[i].text + '</div>' +
                     '</div>';
+                logged ? $('#listInserts').append(list_for_admin) : $('#listInserts').append(list_for_all)
 
-                $('#listInserts').append(list_for_all);
-                $('#listInsertsUpdate').append(list_for_admin);
             }
         }, 'json');
 

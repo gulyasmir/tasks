@@ -1,6 +1,7 @@
 <?php
 require 'config/paths.php';
 require 'config/database.php';
+require 'config/config.php';
 
 require 'libs/database.php';
 require 'libs/session.php';
