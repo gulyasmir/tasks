@@ -1,6 +1,6 @@
 $(document).ready(function () {
     let heightWindow = document.documentElement.clientHeight
-    let heightListInserts = heightWindow - 100 + 'px';
+    let heightListInserts = heightWindow - 150 + 'px';
     $("#listInserts").css('height',heightListInserts )
     function getCookie(name) {
         let matches = document.cookie.match(new RegExp(
@@ -34,23 +34,33 @@ $(document).ready(function () {
     $.get('index/xhrPagination', function (pagination) {
         //var link =  'https://js.gulyasmir.ru/tasks/'
         var link =  '/'
-
+        let countPage = Math.round(pagination)
         let thisPage = getCookie('page')
-        let page = Number(thisPage)
-        let pageBefore =  (page - 1) ?  (page - 1) : 1
+        let page = Math.round(thisPage)
+        let pageBefore =  (page - 1) ?  Math.round(page - 1) : 1
 
-        let pageNext =  ((page + 1) < pagination) ?  (page + 1) : pagination
+        let pageNext =  (page < countPage) ?  Math.round(page + 1) : countPage
 
         let paginationBlock = '<nav>' +
             '    <ul class="pagination">' +
             '        <li class="page-item">' +
-            '            <a class="page-link" href="' + link + 'index?page=1" aria-label="' + pageBefore + '">' +
+            '            <a class="page-link" href="' + link + 'index?page=1" aria-label="Previous">' +
             '                <span aria-hidden="true">&laquo;</span>' +
+            '            </a>' +
+            '        </li>' +
+            '        <li class="page-item">' +
+            '            <a class="page-link" href="' + link + 'index?page=' + pageBefore + '" aria-label="Previous">' +
+            '                <span aria-hidden="true"><</span>' +
             '            </a>' +
             '        </li>' +
             '        <li class="page-item"><a class="page-link " href="' + link + 'index?page=' + page + '">' + page + '</a></li>' +
             '        <li class="page-item">' +
             '            <a class="page-link" href="' + link + 'index?page=' + pageNext + '" aria-label="Next">' +
+            '                <span aria-hidden="true"> > </span>' +
+            '            </a>' +
+            '        </li>' +
+            '        <li class="page-item">' +
+            '            <a class="page-link" href="' + link + 'index?page=' + countPage + '" aria-label="Next">' +
             '                <span aria-hidden="true">&raquo;</span>' +
             '            </a>' +
             '        </li>' +
@@ -68,10 +78,11 @@ $(document).ready(function () {
             var link =  '/'
             logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
             for (var i = 0; i <tasks.length; i++) {
+               let updated =  tasks[i].updated ? 'Отредактировано администратором' : ''
                 var list_for_admin =  '<div class="item status-' + tasks[i].status + '">' +
-                    '<div class="title"> ' + tasks[i].name + ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +
-                    '<div class="email">' + tasks[i].email + '</div>' +
-                    '<div>' + tasks[i].text + '</div>' +
+                    '<div class="name"><span class="title">Имя </span> ' + tasks[i].name + ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +
+                    '<div class="email"><span class="title">Email </span>' + tasks[i].email + '</div>' +
+                    '<div><p class="title">Текст задачи  <span class="updated">(' + updated + ')</span> </p>' + tasks[i].text + '</div>' +
                     '</div>';
                 var list_for_all =  '<div class="item status-' + tasks[i].status + '">' +
                     '<div class="title">' + tasks[i].name + '</div>' +

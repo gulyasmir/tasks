@@ -26,11 +26,12 @@ class Index_Model extends Model {
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
         $text = htmlspecialchars($_POST['text']);
+        $updated = '1';
         $status = $_POST['status'];
         if (!$status){
             $status = 0;
         }
-        $query = "UPDATE `pr_task` SET  `name`= '".$name."' ,`email`= '".$email."' ,`text`= '".$text."' ,`status`= '".$status."'   WHERE  `id`= '".$id."' ";
+        $query = "UPDATE `pr_task` SET  `name`= '".$name."' ,`email`= '".$email."' ,`text`= '".$text."' ,`status`= '".$status."' , `updated`= '".$updated."'  WHERE  `id`= '".$id."' ";
 
         $sth = $this->db->prepare($query );
         $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' => $status));

@@ -25,6 +25,8 @@ class Index extends Controller {
         if ($_GET["page"]){
             $page = htmlspecialchars($_GET["page"]);
             setcookie('page',$page);
+        } else {
+            setcookie('page', 1);
         }
 
         $this->view->render('index/index');

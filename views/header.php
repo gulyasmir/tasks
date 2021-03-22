@@ -23,6 +23,8 @@
                             Список задач с сортировкой
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=id&order=asc">По id (по возрастанию)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=id&order=desc">По id (по убыванию)</a></li>
                             <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=name&order=asc">По имени (по возрастанию)</a></li>
                             <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=name&order=desc">По имени (по убыванию)</a></li>
                             <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=email&order=asc">По Email (по возрастанию)</a></li>

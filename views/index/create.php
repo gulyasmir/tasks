@@ -12,7 +12,7 @@
         <label for="exampleFormControlInput2" class="form-label">Email</label>
         <input type="email" name="email" required class="form-control" id="exampleFormControlInput2" placeholder="Email">
         <div class="invalid-feedback">
-            Пожалуйста, введите Email
+            Email не валиден
         </div>
     </div>
 

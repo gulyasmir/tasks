@@ -5,15 +5,25 @@
     border: 1px solid #eeeeee;
     background: #efefef;
 }
-.title{
+.name{
     font-weight: bold;
 }
-
+.title{
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.updated{
+    font-style: italic;
+    color:#808080;
+    font-weight: normal;
+}
 .email{
     font-style: italic;
 }
 .status-1{
-    background: url("../images/check2-square.svg") no-repeat top 10px right 10px, #ccffcc;
+    background: url("../images/check2-square.svg") no-repeat top 10px right 20px, #ccffcc;
     background-size: 20px;
 }
 .pagination {
