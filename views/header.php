@@ -21,6 +21,15 @@
                         <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index">Список задач</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=name">Сортировка по имени</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=email">Сортировка по Email</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=status">Сортировка по статусу</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL; ?>index/create">Добавить задачу</a>
                     </li>
                     <li class="nav-item">

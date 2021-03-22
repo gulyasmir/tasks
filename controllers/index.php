@@ -11,7 +11,8 @@ class Index extends Controller {
     }
 
     public function index() {
-
+        $sort = $_GET["sort"];
+        setcookie('sort',$sort);
         $this->view->render('index/index');
     }
 
@@ -46,7 +47,12 @@ class Index extends Controller {
     }
 
     public function xhrGetListings() {
-        $this->model->xhrGetListings();
+        if(isset($_COOKIE['sort'])){
+            $sort = $_COOKIE['sort'];
+        }else{
+            $sort = 'id';
+        }
+        $this->model->xhrGetListings($sort);
     }
 
 

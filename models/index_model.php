@@ -36,8 +36,8 @@ class Index_Model extends Model {
         $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' => $status));
     }
 
-    public function xhrGetListings() {
-        $sth = $this->db->prepare("SELECT * FROM `pr_task` WHERE 1");
+    public function xhrGetListings($sort) {
+        $sth = $this->db->prepare("SELECT * FROM `pr_task` WHERE 1 ORDER BY `".$sort."`");
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
         $data = $sth->fetchAll();
