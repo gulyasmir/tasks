@@ -37,9 +37,7 @@ $(document).ready(function () {
         let thisPage = getCookie('page')
         let page = Math.round(thisPage)
         let pageBefore =  (page - 1) ?  Math.round(page - 1) : 1
-
         let pageNext =  (page < countPage) ?  Math.round(page + 1) : countPage
-
         let paginationBlock = '<nav>' +
             '    <ul class="pagination">' +
             '        <li class="page-item">' +
@@ -78,7 +76,7 @@ $(document).ready(function () {
             logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
             for (var i = 0; i <tasks.length; i++) {
                let updated =  tasks[i].updated ? '(Отредактировано администратором)' : ''
-                var list_for_admin =  '<div class="item status-' + tasks[i].status + '">' +
+                var list_for_admin = '<div class="item status-' + tasks[i].status + '">' +
                     '<div class="name"><span class="title">Имя </span> ' + tasks[i].name +
                     ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +
                     '<div class="email"><span class="title">Email </span>' + tasks[i].email + '</div>' +
@@ -88,7 +86,7 @@ $(document).ready(function () {
                     '<div class="name"><span class="title">Имя </span> ' + tasks[i].name +
                     '</div>' +
                     '<div class="email"><span class="title">Email </span>' + tasks[i].email + '</div>' +
-                    '<div><p class="title">Текст задачи  <span class="updated">(' + updated + ')</span> </p>' + tasks[i].text + '</div>' +
+                    '<div><p class="title">Текст задачи  <span class="updated">' + updated + '</span> </p>' + tasks[i].text + '</div>' +
                     '</div>';
                 logged ? $('#listInserts').append(list_for_admin) : $('#listInserts').append(list_for_all)
 
