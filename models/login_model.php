@@ -18,7 +18,8 @@ class Login_Model extends Model {
         if($count > 0) {
             Session::init();
             Session::set('loggedIn', true);
+            header('Location: '.URL.'/index');
         }
-        header('Location: ../index');
+
     }
 }

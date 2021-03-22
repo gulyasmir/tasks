@@ -12,7 +12,7 @@ class Index extends Controller {
 
     public function index() {
 
-       $this->view->render('index/index');
+        $this->view->render('index/index');
     }
 
     public function create() {
@@ -25,24 +25,24 @@ class Index extends Controller {
             $this->view->index = $this->model->xhrGetSingle($id);
             $this->view->render('index/update');
         } else{
-            header('Location: /index');
+            header('Location: '.URL.'/index');
         }
     }
 
 
     public function logout() {
         Session::destroy();
-        header('Location: ../login');
+        header('Location: '.URL.'/login');
         exit();
     }
     function xhrInsert() {
         $this->model->xhrInsert();
-        header('Location: /index');
+        header('Location: '.URL.'/index');
     }
 
     public function xhrUpdate($id) {
         $this->model->xhrUpdate($id);
-        header('Location: /index');
+        header('Location: '.URL.'/index');
     }
 
     public function xhrGetListings() {
