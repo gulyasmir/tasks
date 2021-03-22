@@ -11,8 +11,14 @@ class Index extends Controller {
     }
 
     public function index() {
-        $sort = $_GET["sort"];
-        setcookie('sort',$sort);
+        if ($_GET["sort"]){
+            $sort = htmlspecialchars($_GET["sort"]);
+            setcookie('sort',$sort);
+        }
+        if ($_GET["order"]){
+        $order = htmlspecialchars($_GET["order"]);
+        setcookie('order', $order);
+        }
         $this->view->render('index/index');
     }
 
@@ -52,7 +58,12 @@ class Index extends Controller {
         }else{
             $sort = 'id';
         }
-        $this->model->xhrGetListings($sort);
+        if(isset($_COOKIE['order'])){
+            $order = $_COOKIE['order'];
+        }else{
+            $order = 'asc';
+        }
+        $this->model->xhrGetListings($sort, $order);
     }
 
 

@@ -17,17 +17,20 @@
             </button>
             <div id="header" class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index">Список задач</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=name">Сортировка по имени</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=email">Сортировка по Email</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?php echo URL; ?>index?sort=status">Сортировка по статусу</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Список задач с сортировкой
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=name&order=asc">По имени (по возрастанию)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=name&order=desc">По имени (по убыванию)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=email&order=asc">По Email (по возрастанию)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=email&order=desc">По Email (по убыванию)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=status&order=asc">По статусу (сначала не сделанные)</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URL; ?>index?sort=status&order=desc">По статусу (сначала сделанные)</a></li>
+
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL; ?>index/create">Добавить задачу</a>
