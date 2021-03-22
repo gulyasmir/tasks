@@ -49,7 +49,8 @@ class Index_Model extends Model {
         $count = $this->db->prepare($query );
         $count->execute();
         $data = $count->fetch();
-        echo json_encode($data[0]);
+        $result = $data[0]/SIZE_PAGE;
+        return json_encode($result);
 
     }
 

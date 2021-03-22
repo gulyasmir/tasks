@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    let heightWindow = document.documentElement.clientHeight
+    let heightListInserts = heightWindow - 100 + 'px';
+    $("#listInserts").css('height',heightListInserts )
     function getCookie(name) {
         let matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -28,21 +31,52 @@ $(document).ready(function () {
 
     $(function () {
 
-        $.get('index/xhrGetListings', function (o) {
+    $.get('index/xhrPagination', function (pagination) {
+        //var link =  'https://js.gulyasmir.ru/tasks/'
+        var link =  '/'
+
+        let thisPage = getCookie('page')
+        let page = Number(thisPage)
+        let pageBefore =  (page - 1) ?  (page - 1) : 1
+
+        let pageNext =  ((page + 1) < pagination) ?  (page + 1) : pagination
+
+        let paginationBlock = '<nav>' +
+            '    <ul class="pagination">' +
+            '        <li class="page-item">' +
+            '            <a class="page-link" href="' + link + 'index?page=1" aria-label="' + pageBefore + '">' +
+            '                <span aria-hidden="true">&laquo;</span>' +
+            '            </a>' +
+            '        </li>' +
+            '        <li class="page-item"><a class="page-link " href="' + link + 'index?page=' + page + '">' + page + '</a></li>' +
+            '        <li class="page-item">' +
+            '            <a class="page-link" href="' + link + 'index?page=' + pageNext + '" aria-label="Next">' +
+            '                <span aria-hidden="true">&raquo;</span>' +
+            '            </a>' +
+            '        </li>' +
+            '    </ul>' +
+            '</nav>';
+
+        $('#paginationBlock').append(paginationBlock)
+
+    }, 'json');
+
+        $.get('index/xhrGetListings', function (tasks) {
 
             var logged = getCookie('logged')
-
+            //var link =  'https://js.gulyasmir.ru/tasks/'
+            var link =  '/'
             logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
-            for (var i = 0; i <o.length; i++) {
-                var list_for_admin =  '<div class="item status-' + o[i].status + '">' +
-                    '<div class="title"> ' + o[i].name + ' -  <a  href="/index/update/' + o[i].id + '">Редактировать</a></div>' +
-                    '<div class="email">' + o[i].email + '</div>' +
-                    '<div>' + o[i].text + '</div>' +
+            for (var i = 0; i <tasks.length; i++) {
+                var list_for_admin =  '<div class="item status-' + tasks[i].status + '">' +
+                    '<div class="title"> ' + tasks[i].name + ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +
+                    '<div class="email">' + tasks[i].email + '</div>' +
+                    '<div>' + tasks[i].text + '</div>' +
                     '</div>';
-                var list_for_all =  '<div class="item status-' + o[i].status + '">' +
-                    '<div class="title">' + o[i].name + '</div>' +
-                    '<div class="email">' + o[i].email + '</div>' +
-                    '<div>' + o[i].text + '</div>' +
+                var list_for_all =  '<div class="item status-' + tasks[i].status + '">' +
+                    '<div class="title">' + tasks[i].name + '</div>' +
+                    '<div class="email">' + tasks[i].email + '</div>' +
+                    '<div>' + tasks[i].text + '</div>' +
                     '</div>';
                 logged ? $('#listInserts').append(list_for_admin) : $('#listInserts').append(list_for_all)
 

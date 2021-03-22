@@ -29,7 +29,6 @@ class Index extends Controller {
 
         $this->view->render('index/index');
 
-
     }
 
     public function create() {
@@ -46,14 +45,14 @@ class Index extends Controller {
         }
     }
 
-
     public function logout() {
         setcookie('logged', false);
         Session::destroy();
         header('Location: '.URL.'/login');
         exit();
     }
-    function xhrInsert() {
+
+    public function xhrInsert() {
         $this->model->xhrInsert();
         header('Location: '.URL.'/index');
     }
@@ -61,6 +60,11 @@ class Index extends Controller {
     public function xhrUpdate($id) {
         $this->model->xhrUpdate($id);
         header('Location: '.URL.'/index');
+    }
+
+    public function xhrPagination(){
+        $count_pages  = $this->model->xhrGetCount();
+        echo  $count_pages;
     }
 
     public function xhrGetListings() {
@@ -71,10 +75,7 @@ class Index extends Controller {
 
         $size_page = SIZE_PAGE;
 
-        $offset = ($page -1) * $size_page;
-
-       // $count_tasks = $this->model->xhrGetCount();
-       // $total_pages = ceil($count_tasks / $size_page);
+        $offset = ($page - 1) * $size_page;
 
         $this->model->xhrGetListings($sort, $order, $offset, $size_page);
     }
