@@ -2,6 +2,7 @@ $(document).ready(function () {
     let heightWindow = document.documentElement.clientHeight
     let heightListInserts = heightWindow - 150 + 'px';
     $("#listInserts").css('height',heightListInserts )
+
     function getCookie(name) {
         let matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -109,8 +110,8 @@ $(document).ready(function () {
             }
             return false;
         })
-        $('#taskInsert').submit(function (event) {
 
+        $('#taskInsert').submit(function (event) {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
@@ -123,7 +124,6 @@ $(document).ready(function () {
                     data: data,
                     success: function(){
                         $('#taskInsert')[0].reset();
-
                     }
                 });
             }

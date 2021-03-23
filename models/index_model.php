@@ -9,35 +9,33 @@ class Index_Model extends Model {
        $email = htmlspecialchars($_POST['email']);
        $text = htmlspecialchars($_POST['text']);
 
-       $query = "INSERT INTO `pr_task` (`name`, `email`, `text`, `status`) VALUES ('".$name."', '".$email."', '".$text."', '0');";
+       $query = "INSERT INTO `".DB_PREFIX."task` (`name`, `email`, `text`, `status`) VALUES ('".$name."', '".$email."', '".$text."', '0');";
        $sth = $this->db->prepare($query );
        $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' =>'0'));
   }
     function xhrGetSingle($id) {
-        $query = "SELECT `id`, `name`, `email`, `text`, `status` FROM `pr_task` WHERE `id` = '".$id."'";
+        $query = "SELECT `id`, `text`, `status` FROM `".DB_PREFIX."task` WHERE `id` = '".$id."'";
         $sth = $this->db->prepare($query );
         $sth->execute(array(':id' => $id));
         return $sth->fetch();
     }
 
     function xhrUpdate($id) {
-
-        $name = htmlspecialchars($_POST['name']);
-        $email = htmlspecialchars($_POST['email']);
         $text = htmlspecialchars($_POST['text']);
-        $updated = '1';
-        $status = $_POST['status'];
+        $status = htmlspecialchars($_POST['status']);
+        $updated = htmlspecialchars($_POST['updated']);
+
         if (!$status){
             $status = 0;
         }
-        $query = "UPDATE `pr_task` SET  `name`= '".$name."' ,`email`= '".$email."' ,`text`= '".$text."' ,`status`= '".$status."' , `updated`= '".$updated."'  WHERE  `id`= '".$id."' ";
+        $query = "UPDATE `".DB_PREFIX."task` SET `text`= '".$text."' ,`status`= '".$status."' , `updated`= '".$updated."'  WHERE  `id`= '".$id."' ";
 
         $sth = $this->db->prepare($query );
-        $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' => $status));
+        $sth->execute(array(':text' => $text, ':status' => $status, ':updated' => $updated));
     }
 
     public function xhrGetListings($sort,$order, $offset, $size_page) {
-        $sth = $this->db->prepare("SELECT * FROM `pr_task` WHERE 1 ORDER BY `".$sort."` $order  LIMIT $offset, $size_page");
+        $sth = $this->db->prepare("SELECT  `id`, `name`, `email`, `text`, `status`, `updated` FROM `".DB_PREFIX."task` WHERE 1 ORDER BY `".$sort."` $order  LIMIT $offset, $size_page");
         $sth->setFetchMode(PDO::FETCH_ASSOC);
         $sth->execute();
         $data = $sth->fetchAll();
@@ -45,7 +43,7 @@ class Index_Model extends Model {
     }
 
     function xhrGetCount() {
-        $query = "SELECT COUNT(*) FROM `pr_task`";
+        $query = "SELECT COUNT(*) FROM `".DB_PREFIX."task`";
         $count = $this->db->prepare($query );
         $count->execute();
         $data = $count->fetch();
