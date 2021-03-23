@@ -29,7 +29,10 @@ class Index extends Controller {
         } else {
             setcookie('page', 1, $cookies_time);
         }
-
+        if ($_GET["message"]){
+           if  ($_GET["message"] == 'success' ) { echo '<script type="text/javascript"> alert("Задача добавлена!")</script>';}
+           if  ($_GET["message"] == 'updated' ) { echo '<script type="text/javascript"> alert("Задача отредактирована!")</script>';}
+        }
         $this->view->render('index/index');
 
     }
@@ -43,25 +46,30 @@ class Index extends Controller {
             $this->view->index = $this->model->xhrGetSingle($id);
             $this->view->render('index/update');
         } else{
-            header('Location: '.URL.'/index');
+            header('Location: '.URL.'login');
         }
     }
 
     public function logout() {
         setcookie('logged', false);
         Session::destroy();
-        header('Location: '.URL.'/login');
+        header('Location: '.URL.'login');
         exit();
     }
 
     public function xhrInsert() {
         $this->model->xhrInsert();
-        header('Location: '.URL.'/index');
+        header('Location: '.URL.'index?message=success');
     }
 
     public function xhrUpdate($id) {
-        $this->model->xhrUpdate($id);
-        header('Location: '.URL.'/index');
+        $logged = Session::get('loggedIn');
+        if($logged) {
+            $this->model->xhrUpdate($id);
+            header('Location: ' . URL . 'index?message=updated');
+        } else {
+            header('Location: '.URL.'login');
+        }
     }
 
     public function xhrPagination(){

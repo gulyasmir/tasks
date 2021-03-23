@@ -98,20 +98,15 @@ $(document).ready(function () {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
-                alert('Ошибка!');
             } else {
                 var url = $(this).attr('action');
                 var data = $(this).serialize();
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: data,
-                    success: function(){
-                        alert('Задача отредактирована!');
-                    }
+                    data: data
                 });
             }
-
             return false;
         })
         $('#taskInsert').submit(function (event) {
@@ -119,7 +114,6 @@ $(document).ready(function () {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
-                alert('ошибка!');
             } else {
                 var url = $(this).attr('action');
                 var data = $(this).serialize();
@@ -128,12 +122,11 @@ $(document).ready(function () {
                     url: url,
                     data: data,
                     success: function(){
-                        alert('Задача отправлена!');
                         $('#taskInsert')[0].reset();
+
                     }
                 });
             }
-
             return false;
         })
     });
