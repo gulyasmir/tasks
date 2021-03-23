@@ -4,7 +4,8 @@ class Index extends Controller {
         parent::__construct();
         Session::init();
         $logged = Session::get('loggedIn');
-        setcookie('logged', true);
+        $cookies_logged =  time() + 10;
+        setcookie('logged', true, $cookies_logged);
         if($logged == false) {
             Session::destroy();
             setcookie('logged', false);
