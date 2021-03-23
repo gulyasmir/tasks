@@ -12,7 +12,9 @@ $(document).ready(function () {
 
     (function () {
         'use strict'
+
         var forms = document.querySelectorAll('.needs-validation')
+
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
@@ -69,10 +71,42 @@ $(document).ready(function () {
 
             let logged = getCookie('logged')
             let link =  getCookie('link')
-
-            logged ? $('#listInserts').append('<h1>Редактировать задачи</h1>') : $('#listInserts').append('<h1>Список задач</h1>')
+            
+			let sort =  getCookie('sort')
+			let title_page = 'Сортировка по '
+			switch (sort) {
+			  case 'id':
+			    title_page = title_page + 'id, '
+			    break;
+			  case 'name':
+			    title_page =  title_page + 'имени, '
+			    break;
+			  case 'email':
+			    title_page =  title_page + 'Email, '
+			    break;
+			  case 'status':
+			    title_page =  title_page + 'статусу, '
+			    break;
+			  default:
+			    title_page =  title_page + 'id, '
+			}
+			
+			let order =  getCookie('order')
+			switch (order) {
+			  case 'asc':
+			    title_page =  title_page + 'по возрастанию'
+			    break;
+			  case 'desc':
+			    title_page =  title_page + 'по убыванию '
+			    break;
+			  default:
+			    title_page =  title_page + 'по возрастанию'
+			}
+			
+            logged ? $('#listInserts').append('<h1>Редактировать задачи</h1><p class="sort_type">' + title_page + '</p>') : $('#listInserts').append('<h1>Список задач</h1><p class="sort_type">'+title_page + '</p>')
+            
             for (var i = 0; i <tasks.length; i++) {
-               let updated =  tasks[i].updated ? '(Отредактировано администратором)' : ''
+               let updated =  (tasks[i].updated == '1') ? '(Отредактировано администратором)' : ''
                 var list_for_admin = '<div class="item status-' + tasks[i].status + '">' +
                     '<div class="name"><span class="title">Имя </span> ' + tasks[i].name +
                     ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +
