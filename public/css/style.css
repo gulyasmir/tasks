@@ -5,26 +5,33 @@
     border: 1px solid #eeeeee;
     background: #efefef;
 }
-.name{
+.name ,.email  {
     font-weight: bold;
 }
 .name a{
     font-weight: normal;
     font-style: italic;
 }
-.title{
-    font-weight: bold;
+.title span{
+    font-weight: normal;
     font-style: italic;
     margin-bottom: 0;
     margin-top: 5px;
+}
+.title  {
+    font-weight: bold;
+    margin-bottom: 0;
 }
 .updated{
     font-style: italic;
     color:#808080;
     font-weight: normal;
 }
-.email{
+.email span{
     font-style: italic;
+}
+.email .title, .name .title{
+    font-weight: normal;
 }
 .status-1{
     background: url("../images/check2-square.svg") no-repeat top 10px right 20px, #ccffcc;
