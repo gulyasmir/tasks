@@ -5,6 +5,7 @@
     border: 1px solid #eeeeee;
     background: #efefef;
 }
+
 .name ,.email  {
     font-weight: bold;
 }
@@ -42,24 +43,40 @@
     margin: 0 auto;
 }
 .sort_type{
-   font-style: italic;
-   color:#808080;
+    font-style: italic;
+    color:#808080;
 }
 #listInserts .item{
-     height: 25%;
-     overflow-y:auto;
+    height: 25%;
+    overflow-y:auto;
 }
+
 #listInserts .item::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 #listInserts .item::-webkit-scrollbar-thumb {
     background: #418bfa;
     border-radius: 8px;
-    border: 2px solid #a6c9ff;
 }
 
 #listInserts .item::-webkit-scrollbar-thumb:hover {
     background: #0d6efd;
-    border: 2px solid #74abfc;
+}
+
+#listInserts{
+    overflow-y:auto;
+    padding-right: 15px;
+}
+#listInserts::-webkit-scrollbar {
+    width: 12px;
+}
+
+#listInserts::-webkit-scrollbar-thumb {
+    background: #418bfa;
+    border-radius: 8px;
+}
+
+#listInserts::-webkit-scrollbar-thumb:hover {
+    background: #0d6efd;
 }

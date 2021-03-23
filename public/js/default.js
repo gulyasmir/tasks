@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     let heightWindow = document.documentElement.clientHeight
     let heightListInserts = heightWindow - 150 + 'px';
     $("#listInserts").css('height',heightListInserts )
@@ -30,83 +31,83 @@ $(document).ready(function () {
 
     $(function () {
 
-    $.get('index/xhrPagination', function (pagination) {
-        let link =  getCookie('link')
-        let countPage = Math.round(pagination)
-        let thisPage = getCookie('page')
-        let page = Math.round(thisPage)
-        let pageBefore =  (page - 1) ?  Math.round(page - 1) : 1
-        let pageNext =  (page < countPage) ?  Math.round(page + 1) : countPage
-        let paginationBlock = '<nav>' +
-            '    <ul class="pagination">' +
-            '        <li class="page-item">' +
-            '            <a class="page-link" href="' + link + 'index?page=1" aria-label="Previous">' +
-            '                <span aria-hidden="true">&laquo;</span>' +
-            '            </a>' +
-            '        </li>' +
-            '        <li class="page-item">' +
-            '            <a class="page-link" href="' + link + 'index?page=' + pageBefore + '" aria-label="Previous">' +
-            '                <span aria-hidden="true"><</span>' +
-            '            </a>' +
-            '        </li>' +
-            '        <li class="page-item"><a class="page-link " href="' + link + 'index?page=' + page + '">' + page + '</a></li>' +
-            '        <li class="page-item">' +
-            '            <a class="page-link" href="' + link + 'index?page=' + pageNext + '" aria-label="Next">' +
-            '                <span aria-hidden="true"> > </span>' +
-            '            </a>' +
-            '        </li>' +
-            '        <li class="page-item">' +
-            '            <a class="page-link" href="' + link + 'index?page=' + countPage + '" aria-label="Next">' +
-            '                <span aria-hidden="true">&raquo;</span>' +
-            '            </a>' +
-            '        </li>' +
-            '    </ul>' +
-            '</nav>';
+        $.get('index/xhrPagination', function (pagination) {
+            let link =  getCookie('link')
+            let countPage = Math.round(pagination)
+            let thisPage = getCookie('page')
+            let page = Math.round(thisPage)
+            let pageBefore =  (page - 1) ?  Math.round(page - 1) : 1
+            let pageNext =  (page < countPage) ?  Math.round(page + 1) : countPage
+            let paginationBlock = '<nav>' +
+                '    <ul class="pagination">' +
+                '        <li class="page-item">' +
+                '            <a class="page-link" href="' + link + 'index?page=1" aria-label="Previous">' +
+                '                <span aria-hidden="true">&laquo;</span>' +
+                '            </a>' +
+                '        </li>' +
+                '        <li class="page-item">' +
+                '            <a class="page-link" href="' + link + 'index?page=' + pageBefore + '" aria-label="Previous">' +
+                '                <span aria-hidden="true"><</span>' +
+                '            </a>' +
+                '        </li>' +
+                '        <li class="page-item"><a class="page-link " href="' + link + 'index?page=' + page + '">' + page + '</a></li>' +
+                '        <li class="page-item">' +
+                '            <a class="page-link" href="' + link + 'index?page=' + pageNext + '" aria-label="Next">' +
+                '                <span aria-hidden="true"> > </span>' +
+                '            </a>' +
+                '        </li>' +
+                '        <li class="page-item">' +
+                '            <a class="page-link" href="' + link + 'index?page=' + countPage + '" aria-label="Next">' +
+                '                <span aria-hidden="true">&raquo;</span>' +
+                '            </a>' +
+                '        </li>' +
+                '    </ul>' +
+                '</nav>';
 
-        $('#paginationBlock').append(paginationBlock)
+            $('#paginationBlock').append(paginationBlock)
 
-    }, 'json');
+        }, 'json');
 
         $.get('index/xhrGetListings', function (tasks) {
 
             let logged = getCookie('logged')
             let link =  getCookie('link')
-            
-			let sort =  getCookie('sort')
-			let title_page = 'Сортировка по '
-			switch (sort) {
-			  case 'id':
-			    title_page = title_page + 'id, '
-			    break;
-			  case 'name':
-			    title_page =  title_page + 'имени, '
-			    break;
-			  case 'email':
-			    title_page =  title_page + 'Email, '
-			    break;
-			  case 'status':
-			    title_page =  title_page + 'статусу, '
-			    break;
-			  default:
-			    title_page =  title_page + 'id, '
-			}
-			
-			let order =  getCookie('order')
-			switch (order) {
-			  case 'asc':
-			    title_page =  title_page + 'по возрастанию'
-			    break;
-			  case 'desc':
-			    title_page =  title_page + 'по убыванию '
-			    break;
-			  default:
-			    title_page =  title_page + 'по возрастанию'
-			}
-			
+
+            let sort =  getCookie('sort')
+            let title_page = 'Сортировка по '
+            switch (sort) {
+                case 'id':
+                    title_page = title_page + 'id, '
+                    break;
+                case 'name':
+                    title_page =  title_page + 'имени, '
+                    break;
+                case 'email':
+                    title_page =  title_page + 'Email, '
+                    break;
+                case 'status':
+                    title_page =  title_page + 'статусу, '
+                    break;
+                default:
+                    title_page =  title_page + 'id, '
+            }
+
+            let order =  getCookie('order')
+            switch (order) {
+                case 'asc':
+                    title_page =  title_page + 'по возрастанию'
+                    break;
+                case 'desc':
+                    title_page =  title_page + 'по убыванию '
+                    break;
+                default:
+                    title_page =  title_page + 'по возрастанию'
+            }
+
             logged ? $('#listInserts').append('<h1>Редактировать задачи</h1><p class="sort_type">' + title_page + '</p>') : $('#listInserts').append('<h1>Список задач</h1><p class="sort_type">'+title_page + '</p>')
-            
+
             for (var i = 0; i <tasks.length; i++) {
-               let updated =  (tasks[i].updated == '1') ? '(Отредактировано администратором)' : ''
+                let updated =  (tasks[i].updated == '1') ? '(Отредактировано администратором)' : ''
                 var list_for_admin = '<div class="item status-' + tasks[i].status + '">' +
                     '<div class="name"><span class="title">Имя </span> ' + tasks[i].name +
                     ' -  <a  href="' + link + 'index/update/' + tasks[i].id + '">Редактировать</a></div>' +

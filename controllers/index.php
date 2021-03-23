@@ -5,12 +5,25 @@ class Index extends Controller {
         Session::init();
         $logged = Session::get('loggedIn');
         $cookies_logged =  time() + 10;
+
+
+        $time_delete =  time() - 10;
+
+        setcookie('logged', 1, $time_delete);
         setcookie('logged', true, $cookies_logged);
+
         if($logged == false) {
             Session::destroy();
-            setcookie('logged', false);
+            setcookie('logged', false,$time_delete);
         }
-        setcookie('link', URL);
+
+        if (isset($_COOKIE['page'])){
+            setcookie('page', 1, $time_delete);
+        }
+
+        if (!isset($_COOKIE['link'])){
+            setcookie('link', URL);
+        }
         $this->view->js = array('default.js');
     }
 
@@ -31,8 +44,8 @@ class Index extends Controller {
             setcookie('page', 1, $cookies_time);
         }
         if ($_GET["message"]){
-           if  ($_GET["message"] == 'success' ) { echo '<script type="text/javascript"> alert("Задача добавлена!")</script>';}
-           if  ($_GET["message"] == 'updated' ) { echo '<script type="text/javascript"> alert("Задача отредактирована!")</script>';}
+            if  ($_GET["message"] == 'success' ) { echo '<script type="text/javascript"> alert("Задача добавлена!")</script>';}
+            if  ($_GET["message"] == 'updated' ) { echo '<script type="text/javascript"> alert("Задача отредактирована!")</script>';}
         }
         $this->view->render('index/index');
 
