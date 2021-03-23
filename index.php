@@ -11,7 +11,7 @@ function autoLoader() {
     $config = ['paths','database','config'];
     $count_config = count($config);
     for ($i=0;$i<$count_config;$i++){
-        require 'libs/'.$config[$i].'.php';
+        require 'config/'.$config[$i].'.php';
     }
 }
 
