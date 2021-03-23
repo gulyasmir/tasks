@@ -8,9 +8,10 @@ class Index_Model extends Model {
        $name = htmlspecialchars($_POST['name']);
        $email = htmlspecialchars($_POST['email']);
        $text = htmlspecialchars($_POST['text']);
+
        $query = "INSERT INTO `pr_task` (`name`, `email`, `text`, `status`) VALUES ('".$name."', '".$email."', '".$text."', '0');";
        $sth = $this->db->prepare($query );
-       $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' => '0'));
+       $sth->execute(array(':name' => $name,':email' => $email,':text' => $text, ':status' =>'0'));
   }
     function xhrGetSingle($id) {
         $query = "SELECT `id`, `name`, `email`, `text`, `status` FROM `pr_task` WHERE `id` = '".$id."'";
