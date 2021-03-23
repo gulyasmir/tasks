@@ -14,25 +14,25 @@ class Index extends Controller {
     }
 
     public function index() {
+        $cookies_time =  time() + 1000;
         if ($_GET["sort"]){
             $sort = htmlspecialchars($_GET["sort"]);
-            setcookie('sort',$sort);
+            setcookie('sort', $sort, $cookies_time);
         }
         if ($_GET["order"]){
             $order = htmlspecialchars($_GET["order"]);
-            setcookie('order', $order);
+            setcookie('order', $order, $cookies_time);
         }
         if ($_GET["page"]){
             $page = htmlspecialchars($_GET["page"]);
-            setcookie('page',$page);
+            setcookie('page',$page, $cookies_time);
         } else {
-            setcookie('page', 1);
+            setcookie('page', 1, $cookies_time);
         }
 
         $this->view->render('index/index');
 
     }
-
     public function create() {
         $this->view->render('index/create');
     }

@@ -8,6 +8,10 @@
 .name{
     font-weight: bold;
 }
+.name a{
+    font-weight: normal;
+    font-style: italic;
+}
 .title{
     font-weight: bold;
     font-style: italic;

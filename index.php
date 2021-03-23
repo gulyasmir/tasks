@@ -1,15 +1,20 @@
 <?php
-require 'config/paths.php';
-require 'config/database.php';
-require 'config/config.php';
+spl_autoload_register('autoLoader');
 
-require 'libs/database.php';
-require 'libs/session.php';
+function autoLoader() {
+    $libs = ['database','session','bootstrap','controller','model','view'];
+    $count_libs = count($libs);
+    for ($i=0;$i<$count_libs;$i++){
+        require 'libs/'.$libs[$i].'.php';
+        echo 'libs/'.$libs[$i].'.php';
+    }
 
-require 'libs/bootstrap.php';
-require 'libs/controller.php';
-require 'libs/model.php';
-require 'libs/view.php';
-
+    $config = ['paths','database','config'];
+    $count_config = count($config);
+    for ($i=0;$i<$count_config;$i++){
+        require 'libs/'.$config[$i].'.php';
+        echo 'libs/'.$config[$i].'.php';
+    }
+}
 
 $app = new Bootstrap();
