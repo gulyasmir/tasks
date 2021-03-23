@@ -41,7 +41,10 @@
     width:175px;
     margin: 0 auto;
 }
-
+.sort_type{
+   font-style: italic;
+   color:#808080;
+}
 #listInserts .item{
      height: 25%;
      overflow-y:auto;
