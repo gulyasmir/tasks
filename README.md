@@ -1,6 +1,6 @@
 # Задачник
 
-Онлайн смотреть тут https://js.gulyasmir.ru/tasks
+Онлайн смотреть тут http://parser.gulyasmir.ru/
 
 Для запуска у себя нужно:
 1. Склонировать себе командой git clone https://github.com/gulyasmir/tasks.git
