@@ -1,6 +1,7 @@
 # Задачник
 
 Онлайн смотреть тут http://parser.gulyasmir.ru/
+Цель - написать задачник на PHP не используя фреймворки.
 
 Для запуска у себя нужно:
 1. Склонировать себе командой git clone https://github.com/gulyasmir/tasks.git
